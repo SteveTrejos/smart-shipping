@@ -1,27 +1,30 @@
 <div class="login-container">
     <div class="container">
-        <form>
+        <form [formGroup]="loginForm">
             <div class="login-header">
                 <img class="logo" src="assets/images/truck-logo.png" alt="logo">
                 <div class="login-title">
-                    <p class="text-5xl font-bold text-white tracking-wide">Smart</p>
+                    <p class="text-logo text-5xl font-bold text-white tracking-wide">Smart</p>
                     <p class="text-3xl font-bold text-white tracking-widest">Shipping</p>
                 </div>
             </div>
             <div class="input-fields">
                 <mat-form-field>
-                    <input matInput class="email-input" type="text" placeholder="Email address">
+                    <input matInput class="email-input" type="text" placeholder="Email address" formControlName="email">
                     <!-- <div class="icon-container"> -->
                         <mat-icon matPrefix fontIcon="mail"></mat-icon>
                     <!-- </div> -->
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput class="password-input" type="password" placeholder="Password">
+                    <input matInput class="password-input" type="password" placeholder="Password" formControlName="password">
                     <mat-icon matPrefix fontIcon="lock"></mat-icon>
                 </mat-form-field>
+                @if(loginFailed){
+                    <p class="text-center text-red-500 text-2xl">{{loginFailMessage}}</p>
+                }
             </div> 
             <div class="btn-login">
-                <button matButton="tonal">Log in</button>
+                <button matButton="tonal" (click)="login(this.loginForm.value)">Log in</button>
             </div>
             
             <div class="links-container">
