@@ -37,6 +37,7 @@ export class Login implements OnInit{
         if (res.error) {
             this.loginFailed = true;
             this.loginFailMessage = 'Invalid user or password';
+            //TODO borrar mensaje de error cuando borre el correo
         } else {
           this.router.navigate(['/dashboard']);
           console.log('Login exitoso:', res);
