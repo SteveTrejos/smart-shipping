@@ -31,7 +31,7 @@ export class LoginService {
   sendRecoveryEmail(email: string | null): Observable<LoginResponse>{
     return this.http.post(`${this.baseUrl}/auth/forgot-password`, {emailTo: email}).pipe(
       catchError(err => {
-        return of({error: true, message: err.error});
+        return of(err);
       })
     )
   }
