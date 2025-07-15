@@ -8,10 +8,19 @@ export interface LoginResponse{
   message?: any;
   token?: string;
 }
+
+export interface CreateUser{
+  name: string;
+  last_name: string;
+  phone: string;
+  email: string;
+  document_id: string;
+  password: string;
+}
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class AuthService {
   constructor() { }
   private http = inject(HttpClient)
   baseUrl = environment.baseUrl;
@@ -30,6 +39,14 @@ export class LoginService {
 
   sendRecoveryEmail(email: string | null): Observable<LoginResponse>{
     return this.http.post(`${this.baseUrl}/auth/forgot-password`, {emailTo: email}).pipe(
+      catchError(err => {
+        return of(err);
+      })
+    )
+  }
+
+  createUser(form: CreateUser ){
+    return this.http.post(`${this.baseUrl}/auth/users`, form).pipe(
       catchError(err => {
         return of(err);
       })

@@ -3,7 +3,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormField} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
-import { LoginService } from '../../services/login.service';
+import { AuthService } from '../../services/login.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
@@ -15,7 +15,7 @@ import { Router, RouterLink } from '@angular/router';
 })
 
 export class Login implements OnInit{
-  loginService = inject(LoginService);
+  authService = inject(AuthService);
   router = inject(Router);
   loginFailed = false;
   loginFailMessage = '';
@@ -36,7 +36,7 @@ export class Login implements OnInit{
   }
 
   login(formData: any){
-    this.loginService.handleLogin(formData).subscribe({
+    this.authService.handleLogin(formData).subscribe({
       next: res => {
         if(!res.error && res.token){
           this.router.navigate(['/dashboard']);

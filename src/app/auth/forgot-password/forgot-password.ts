@@ -3,7 +3,7 @@ import {MatInputModule} from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import { LoginService } from '../../services/login.service';
+import { AuthService } from '../../services/login.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 @Component({
@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './forgot-password.scss'
 })
 export class ForgotPassword {
-  loginService = inject(LoginService);
+  authService = inject(AuthService);
   form = new FormGroup({
   email: new FormControl('')
   })
@@ -48,7 +48,7 @@ handleRecoveryEmail(e?: any){
       return;
     }
     this.isLoaderActive = true;
-    this.loginService.sendRecoveryEmail(email.value).subscribe({
+    this.authService.sendRecoveryEmail(email.value).subscribe({
       next: (res: any) => {
           if(!res.error){
             this.isLoaderActive = false;
